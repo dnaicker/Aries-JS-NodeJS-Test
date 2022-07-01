@@ -31,10 +31,22 @@ module SSIAgent {
         agent.registerInboundTransport(new HttpInboundTransport({port: 3001}));
     
         // Initialise Agent
+        console.log(agent.isInitialized);
+
         await agent.initialize().then((result)=>{}).catch(console.error)
     
         return agent;
     }
+
+    export async function createNewInvitation (agent: Agent) {
+        const outOfBandRecord = await agent.oob.createInvitation()
+      
+        return {
+          invitationUrl: outOfBandRecord.outOfBandInvitation.toUrl({ domain: 'https://www.google.com' }),
+          outOfBandRecord,
+        }
+      }
+      
 }
 
 export {SSIAgent};

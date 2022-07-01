@@ -28,6 +28,13 @@ app.get('/initialiseAgent', (req, res) => __awaiter(void 0, void 0, void 0, func
     let result = yield agent_1.SSIAgent.initialiseAgent("Agentbob");
     res.send("Hello new Agent");
 }));
+app.get('/createInvitation', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // res.header('Content-Type', 'application/json');
+    let agentBob = yield agent_1.SSIAgent.initialiseAgent("Agentbob");
+    let invitation = yield agent_1.SSIAgent.createNewInvitation(agentBob);
+    console.log(invitation);
+    res.json(invitation);
+}));
 // --------------------
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

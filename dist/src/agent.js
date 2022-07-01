@@ -39,10 +39,21 @@ var SSIAgent;
             agent.registerInboundTransport(new core_2.HttpOutboundTransport());
             agent.registerInboundTransport(new node_2.HttpInboundTransport({ port: 3001 }));
             // Initialise Agent
+            console.log(agent.isInitialized);
             yield agent.initialize().then((result) => { }).catch(console.error);
             return agent;
         });
     }
     SSIAgent.initialiseAgent = initialiseAgent;
+    function createNewInvitation(agent) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const outOfBandRecord = yield agent.oob.createInvitation();
+            return {
+                invitationUrl: outOfBandRecord.outOfBandInvitation.toUrl({ domain: 'https://www.google.com' }),
+                outOfBandRecord,
+            };
+        });
+    }
+    SSIAgent.createNewInvitation = createNewInvitation;
 })(SSIAgent || (SSIAgent = {}));
 exports.SSIAgent = SSIAgent;

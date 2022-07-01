@@ -17,6 +17,15 @@ app.get('/initialiseAgent', async (req, res) => {
   res.send("Hello new Agent")
 })
 
+app.get('/createInvitation', async (req, res) => {
+  // res.header('Content-Type', 'application/json');
+  let agentBob = await SSIAgent.initialiseAgent("Agentbob");
+  let invitation = await SSIAgent.createNewInvitation(agentBob);
+  console.log(invitation)
+  
+  res.json(invitation);
+})
+
 // --------------------
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
