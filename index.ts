@@ -4,6 +4,7 @@ import { agentDependencies } from '@aries-framework/node'
 import { HttpOutboundTransport, WsOutboundTransport } from '@aries-framework/core'
 import { HttpInboundTransport } from '@aries-framework/node'
 import express, { Express, Request, Response } from 'express';
+import { ConsoleLogger, LogLevel } from '@aries-framework/core'
 
 const path = require('path');
 require('dotenv').config({
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
   // The agent initialization configuration
   const config: InitConfig = {
     label: 'docs-nodejs-agent',
+    logger: new ConsoleLogger(LogLevel.info),
     walletConfig: {
       id: 'wallet-id',
       key: 'testkey0000000000000000000000000',
@@ -32,7 +34,7 @@ app.get('/', (req, res) => {
   agent.registerOutboundTransport(new HttpOutboundTransport())
   agent.registerInboundTransport(new HttpInboundTransport({ port: 3000 }))
   
-  const initialize = async () => await agent.initialize().then((result)=>{console.log(result)}).catch(console.error)
+  const initialize = async () => await agent.initialize().then((result)=>{}).catch(console.error)
 
   initialize();
 

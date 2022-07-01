@@ -17,6 +17,7 @@ const node_1 = require("@aries-framework/node");
 const core_2 = require("@aries-framework/core");
 const node_2 = require("@aries-framework/node");
 const express_1 = __importDefault(require("express"));
+const core_3 = require("@aries-framework/core");
 const path = require('path');
 require('dotenv').config({
     path: path.resolve('config.env'),
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
     // The agent initialization configuration
     const config = {
         label: 'docs-nodejs-agent',
+        logger: new core_3.ConsoleLogger(core_3.LogLevel.info),
         walletConfig: {
             id: 'wallet-id',
             key: 'testkey0000000000000000000000000',
@@ -38,7 +40,7 @@ app.get('/', (req, res) => {
     // Registering the required in- and outbound transports
     agent.registerOutboundTransport(new core_2.HttpOutboundTransport());
     agent.registerInboundTransport(new node_2.HttpInboundTransport({ port: 3000 }));
-    const initialize = () => __awaiter(void 0, void 0, void 0, function* () { return yield agent.initialize().then((result) => { console.log(result); }).catch(console.error); });
+    const initialize = () => __awaiter(void 0, void 0, void 0, function* () { return yield agent.initialize().then((result) => { }).catch(console.error); });
     initialize();
     res.send('Hello World!');
 });
