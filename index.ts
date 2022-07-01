@@ -10,9 +10,11 @@ const port = process.env.PORT;
 // --------------------
 // API Call: Create Agent
 // Todo: accept parameter input name
+// Todo: send JSON back
 app.get('/initialiseAgent', async (req, res) => {
   // res.header('Content-Type', 'application/json');
   let result = await SSIAgent.initialiseAgent("Agentbob");
+  res.send("Hello new Agent")
 })
 
 // --------------------
