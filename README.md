@@ -6,7 +6,7 @@ A simple nodejs AriesJS agent that will connect to a mobile wallet and create an
 ```
 1. run 'npm install'
 2. copy '.env-template' to '.env'
-3. update .env file with 'PORT' number
+3. update '.env' file with 'PORT' number
 ```
 
 ## Build and Run 

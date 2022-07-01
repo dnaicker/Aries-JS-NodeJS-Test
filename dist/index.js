@@ -12,41 +12,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@aries-framework/core");
-const node_1 = require("@aries-framework/node");
-const core_2 = require("@aries-framework/core");
-const node_2 = require("@aries-framework/node");
 const express_1 = __importDefault(require("express"));
-const core_3 = require("@aries-framework/core");
+const agent_1 = require("./src/agent");
 const path = require('path');
-require('dotenv').config({
-    path: path.resolve('config.env'),
-});
+require('dotenv').config({ path: path.resolve('config.env') });
 console.log(require("dotenv").config());
 const app = (0, express_1.default)();
 const port = process.env.PORT;
-app.get('/createAgent', (req, res) => {
-    // initialising agent
-    const initialize = () => __awaiter(void 0, void 0, void 0, function* () {
-        // The agent initialization configuration
-        const config = {
-            label: 'docs-nodejs-agent',
-            logger: new core_3.ConsoleLogger(core_3.LogLevel.info),
-            walletConfig: {
-                id: 'wallet-id',
-                key: 'testkey0000000000000000000000000',
-            },
-        };
-        // Creating an agent instance
-        const agent = new core_1.Agent(config, node_1.agentDependencies);
-        // Registering the required in- and outbound transports
-        agent.registerOutboundTransport(new core_2.HttpOutboundTransport());
-        agent.registerInboundTransport(new node_2.HttpInboundTransport({ port: 3000 }));
-        yield agent.initialize().then((result) => { }).catch(console.error);
-    });
-    initialize();
-    res.send('Hello Aries JS Agent Bob!');
-});
+// --------------------
+// API Call: Create Agent
+// Todo: accept parameter input name
+app.get('/initialiseAgent', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // res.header('Content-Type', 'application/json');
+    let result = yield agent_1.SSIAgent.initialiseAgent("Agentbob");
+}));
+// --------------------
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
+const stringifyError = function (err, filter, space) {
+    var plainObject = {};
+    Object.getOwnPropertyNames(err).forEach(function (key) {
+        plainObject[key] = err[key];
+    });
+    return JSON.stringify(plainObject, filter, space);
+};
