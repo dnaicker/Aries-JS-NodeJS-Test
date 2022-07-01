@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const agent_1 = require("./src/agent");
+const app = (0, express_1.default)();
 const path = require('path');
 require('dotenv').config({ path: path.resolve('config.env') });
 console.log(require("dotenv").config());
-const app = (0, express_1.default)();
 const port = process.env.PORT;
 // --------------------
 // API Call: Create Agent
@@ -28,12 +28,5 @@ app.get('/initialiseAgent', (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 // --------------------
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Listening on port ${port}`);
 });
-const stringifyError = function (err, filter, space) {
-    var plainObject = {};
-    Object.getOwnPropertyNames(err).forEach(function (key) {
-        plainObject[key] = err[key];
-    });
-    return JSON.stringify(plainObject, filter, space);
-};

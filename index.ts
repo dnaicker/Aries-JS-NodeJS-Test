@@ -1,19 +1,11 @@
-import type { InitConfig } from '@aries-framework/core'
-import { Agent } from '@aries-framework/core'
-import { agentDependencies } from '@aries-framework/node'
-import { HttpOutboundTransport, WsOutboundTransport } from '@aries-framework/core'
-import { HttpInboundTransport } from '@aries-framework/node'
 import express, { Express, Request, Response } from 'express';
-import { ConsoleLogger, LogLevel } from '@aries-framework/core'
 import {SSIAgent} from './src/agent';
 
+const app: Express = express();
 const path = require('path');
 require('dotenv').config({ path: path.resolve('config.env') });
 console.log(require("dotenv").config())
-const app: Express = express();
 const port = process.env.PORT;
-
-
 
 // --------------------
 // API Call: Create Agent
@@ -25,13 +17,5 @@ app.get('/initialiseAgent', async (req, res) => {
 
 // --------------------
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Listening on port ${port}`)
 })
-
-const stringifyError = function(err, filter, space) {
-	var plainObject = {};
-	Object.getOwnPropertyNames(err).forEach(function(key) {
-		plainObject[key] = err[key];
-	});
-	return JSON.stringify(plainObject, filter, space);
-};
