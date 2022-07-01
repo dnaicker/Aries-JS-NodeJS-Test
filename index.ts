@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express';
-import {SSIAgent} from './src/agent';
+import {SSIAgent} from './src/Agent';
 
 const app: Express = express();
 const path = require('path');
