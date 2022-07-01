@@ -25,24 +25,27 @@ require('dotenv').config({
 console.log(require("dotenv").config());
 const app = (0, express_1.default)();
 const port = process.env.PORT;
-app.get('/', (req, res) => {
-    // The agent initialization configuration
-    const config = {
-        label: 'docs-nodejs-agent',
-        logger: new core_3.ConsoleLogger(core_3.LogLevel.info),
-        walletConfig: {
-            id: 'wallet-id',
-            key: 'testkey0000000000000000000000000',
-        },
-    };
-    // Creating an agent instance
-    const agent = new core_1.Agent(config, node_1.agentDependencies);
-    // Registering the required in- and outbound transports
-    agent.registerOutboundTransport(new core_2.HttpOutboundTransport());
-    agent.registerInboundTransport(new node_2.HttpInboundTransport({ port: 3000 }));
-    const initialize = () => __awaiter(void 0, void 0, void 0, function* () { return yield agent.initialize().then((result) => { }).catch(console.error); });
+app.get('/createAgent', (req, res) => {
+    // initialising agent
+    const initialize = () => __awaiter(void 0, void 0, void 0, function* () {
+        // The agent initialization configuration
+        const config = {
+            label: 'docs-nodejs-agent',
+            logger: new core_3.ConsoleLogger(core_3.LogLevel.info),
+            walletConfig: {
+                id: 'wallet-id',
+                key: 'testkey0000000000000000000000000',
+            },
+        };
+        // Creating an agent instance
+        const agent = new core_1.Agent(config, node_1.agentDependencies);
+        // Registering the required in- and outbound transports
+        agent.registerOutboundTransport(new core_2.HttpOutboundTransport());
+        agent.registerInboundTransport(new node_2.HttpInboundTransport({ port: 3000 }));
+        yield agent.initialize().then((result) => { }).catch(console.error);
+    });
     initialize();
-    res.send('Hello World!');
+    res.send('Hello Aries JS Agent Bob!');
 });
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
