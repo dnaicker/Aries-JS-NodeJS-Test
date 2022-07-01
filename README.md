@@ -1,11 +1,11 @@
-## Setup with:
+## Setup 
 ```
 1. run 'npm install'
 2. copy '.env-template' to '.env'
-3. add port number to access site on .env
+3. update .env file with 'PORT' number
 ```
 
-## Build and run with:
+## Build and Run 
 ```
 1. 'npm run dev'
 ```
