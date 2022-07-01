@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const Agent_1 = require("./src/Agent");
+const agent_1 = require("./src/agent");
 const app = (0, express_1.default)();
 const path = require('path');
 require('dotenv').config({ path: path.resolve('config.env') });
@@ -25,7 +25,7 @@ const port = process.env.PORT;
 // Todo: send JSON back
 app.get('/initialiseAgent', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // res.header('Content-Type', 'application/json');
-    let result = yield Agent_1.SSIAgent.initialiseAgent("Agentbob");
+    let result = yield agent_1.SSIAgent.initialiseAgent("Agentbob");
     res.send("Hello new Agent");
 }));
 // --------------------

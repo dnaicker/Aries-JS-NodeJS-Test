@@ -13,6 +13,7 @@ exports.SSIAgent = void 0;
 const core_1 = require("@aries-framework/core");
 const node_1 = require("@aries-framework/node");
 const core_2 = require("@aries-framework/core");
+const node_2 = require("@aries-framework/node");
 const core_3 = require("@aries-framework/core");
 var SSIAgent;
 (function (SSIAgent) {
@@ -22,19 +23,21 @@ var SSIAgent;
         return __awaiter(this, void 0, void 0, function* () {
             // Agent configuration
             const config = {
-                label: 'docs-nodejs-agent',
+                label: 'demo-agent-acme',
                 logger: new core_3.ConsoleLogger(core_3.LogLevel.info),
                 walletConfig: {
-                    id: 'Agentbob',
-                    key: 'demoagentbob00000000000000000000',
+                    id: 'mainAcme',
+                    key: 'demoagentacme0000000000000000000',
                 },
-                autoAcceptConnections: true
+                autoAcceptConnections: true,
+                endpoints: ['http://localhost:3001'],
             };
             // Agent Instance
             const agent = new core_1.Agent(config, node_1.agentDependencies);
             // Set inbound and outbound transports
             agent.registerOutboundTransport(new core_2.WsOutboundTransport());
             agent.registerInboundTransport(new core_2.HttpOutboundTransport());
+            agent.registerInboundTransport(new node_2.HttpInboundTransport({ port: 3001 }));
             // Initialise Agent
             yield agent.initialize().then((result) => { }).catch(console.error);
             return agent;
