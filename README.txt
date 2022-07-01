@@ -1,5 +1,5 @@
-Build with:
-1. `npx tsx`
+Setup with:
+1. `npx install`
 
 Run with:
-1. `node index.js`
+1. `npm run dev`
